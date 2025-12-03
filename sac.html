@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SAC</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d0d0d;
+      color: #fff;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      background: linear-gradient(135deg, #00bcd4, #6200ea);
+      color: white;
+    }
+
+    header h1 {
+      font-size: 2.8em;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2em;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    section {
+      background-color: #1b1b1b;
+      padding: 30px;
+      border-radius: 10px;
+      margin-bottom: 40px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      color: #00bcd4;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input, textarea {
+      margin-bottom: 15px;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background-color: #2a2a2a;
+      color: #fff;
+      font-size: 1em;
+    }
+
+    input:focus, textarea:focus {
+      outline: 2px solid #00bcd4;
+    }
+
+    button {
+      background-color: #00bcd4;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0097a7;
+    }
+
+    .faq-item {
+      margin-bottom: 20px;
+    }
+
+    .faq-item h3 {
+      color: #fff;
+      margin-bottom: 5px;
+    }
+
+    footer {
+      text-align: center;
+      color: #777;
+      font-size: 0.9em;
+      margin-top: 50px;
+    }
+
+    /* Botão do WhatsApp */
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 25px;
+      right: 25px;
+      background-color: #25d366;
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 32px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+
+    /* Botão do chat (balãozinho) */
+    .chat-toggle {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 100px;
+      right: 25px;
+      background-color: #00bcd4;
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 32px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .chat-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    /* Chat automático */
+    .chat-box {
+      position: fixed;
+      bottom: 170px;
+      right: 25px;
+      width: 300px;
+      background: #1b1b1b;
+      border: 1px solid #00bcd4;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 99;
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, #00bcd4, #6200ea);
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .chat-messages {
+      height: 220px;
+      padding: 10px;
+      overflow-y: auto;
+      color: #ccc;
+      font-size: 0.9em;
+    }
+
+    .chat-input {
+      display: flex;
+    }
+
+    .chat-input input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    .chat-input button {
+      background: #00bcd4;
+      border: none;
+      color: #fff;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Atendimento ao Cliente</h1>
+    <p>Estamos aqui para te ajudar! Fale com a gente ou confira nossas perguntas frequentes.</p>
+  </header>
+
+  <div class="container">
+
+    <section>
+      <h2>📬 Fale Conosco</h2>
+      <form action="#" method="POST">
+        <input type="text" name="nome" placeholder="Seu nome" required>
+        <input type="email" name="email" placeholder="Seu e-mail" required>
+        <textarea name="mensagem" rows="6" placeholder="Digite sua mensagem aqui..." required></textarea>
+        <button type="submit">Enviar Mensagem</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>❓ Perguntas Frequentes (FAQ)</h2>
+      <div class="faq-item">
+        <h3>Como posso acompanhar meu pedido?</h3>
+        <p>Você pode acompanhar seu pedido através do link enviado por e-mail após a compra.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Quais são os canais de atendimento?</h3>
+        <p>Atendemos por e-mail, telefone e WhatsApp. Informaçôes abaixo.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Em quanto tempo respondem?</h3>
+        <p>Nosso tempo médio de resposta é de até 24h úteis.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>📞 Canais de Atendimento</h2>
+      <p><strong>Email:</strong> atendimento@suaempresa.com</p>
+      <p><strong>WhatsApp:</strong> (11) 99999-9999</p>
+      <p><strong>Telefone:</strong> 0800 123 4567</p>
+      <p><strong>Horário de atendimento:</strong> Segunda a sexta, das 9h às 18h</p>
+    </section>
+
+    <section>
+      <h2>📍 Localização</h2>
+      <p>Nos encontre em nosso endereço físico:</p>
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.9334289754475!2d-46.60225862564593!3d-23.570239278791173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5a23b29db6d7%3A0x68d594b4a3a7f9b!2sUniversidade%20S%C3%A3o%20Judas%20Tadeu%20-%20Campus%20Mooca!5e0!3m2!1spt-BR!2sbr!4v1700000000000"
+        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+      </iframe>
+    </section>
+
+  </div>
+
+  <footer>
+    &copy; 2025 Sua Empresa. Todos os direitos reservados.
+  </footer>
+
+  <!-- Botão WhatsApp -->
+  <a href="https://wa.me/5511999999999" class="whatsapp-float" target="_blank">💬</a>
+
+  <!-- Botão do chat -->
+  <div class="chat-toggle" id="chatToggle">💭</div>
+
+  <!-- Chat automático -->
+  <div class="chat-box" id="chatBox">
+    <div class="chat-header">Chat Automático</div>
+    <div class="chat-messages" id="chatMessages">
+      <p><strong>Bot:</strong> Olá! 👋 Seja bem-vindo(a)! Como posso te ajudar hoje?</p>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Digite sua mensagem...">
+      <button onclick="sendMessage()">Enviar</button>
+    </div>
+  </div>
+    
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCVQDlF_Ud-yaLMh905aGAuLRLZdTGBSmM",
+  authDomain: "catalogo-web-loja-virtual.firebaseapp.com",
+  databaseURL: "https://catalogo-web-loja-virtual-default-rtdb.firebaseio.com/",
+  projectId: "catalogo-web-loja-virtual",
+  storageBucket: "catalogo-web-loja-virtual.firebasestorage.app",
+  messagingSenderId: "405243074932",
+  appId: "1:405243074932:web:09a55d0acdb9efa1683421",
+  measurementId: "G-9MDDN9XTP0"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.querySelector("form");
+    form.addEventListener("submit", async (e) => {k
+      e.preventDefault();
+
+      const nome = form.nome.value;
+      const email = form.email.value;
+      const mensagem = form.mensagem.value;
+
+      try {
+        await addDoc(collection(db, "mensagens"), {
+          nome,
+          email,
+          mensagem,
+          data: new Date()
+        });
+        alert("Mensagem enviada com sucesso!");
+        form.reset();
+      } catch (error) {
+        console.error("Erro ao enviar mensagem: ", error);
+        alert("Erro ao enviar mensagem. Tente novamente.");
+      }
+    });
+  </script>
+
+
+  <script>
+    // Alternar visibilidade do chat
+    document.getElementById('chatToggle').addEventListener('click', function() {
+      const chatBox = document.getElementById('chatBox');
+      chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Chat "inteligente" simples
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const messages = document.getElementById('chatMessages');
+      const userMsg = input.value.trim();
+      if (userMsg === '') return;
+
+      const msgUser = document.createElement('p');
+      msgUser.innerHTML = `<strong>Você:</strong> ${userMsg}`;
+      messages.appendChild(msgUser);
+
+      input.value = '';
+      messages.scrollTop = messages.scrollHeight;
+
+      setTimeout(() => {
+        const msgBot = document.createElement('p');
+        msgBot.innerHTML = `<strong>Bot:</strong> ${getBotResponse(userMsg)}`;
+        messages.appendChild(msgBot);
+        messages.scrollTop = messages.scrollHeight;
+      }, 800);
+    }
+
+    // Função com respostas automáticas
+    function getBotResponse(msg) {
+      msg = msg.toLowerCase();
+
+      if (msg.includes('pedido')) return 'Você pode acompanhar seu pedido pelo link que enviamos por e-mail 📦.';
+      if (msg.includes('horário')) return 'Nosso horário de atendimento é de segunda a sexta, das 9h às 18h 🕓.';
+      if (msg.includes('email')) return 'Você pode enviar um e-mail para atendimento@suaempresa.com 📧.';
+      if (msg.includes('telefone')) return 'Nosso telefone é 0800 123 4567 ☎️.';
+      if (msg.includes('whatsapp')) return 'Claro! Nosso WhatsApp é (11) 99999-9999 💬.';
+      if (msg.includes('atendente') || msg.includes('humano')) return 'Um atendente humano entrará em contato com você em breve 👩‍💻.';
+      if (msg.includes('oi') || msg.includes('olá') || msg.includes('bom dia') || msg.includes('boa tarde')) return 'Olá! 😄 Como posso te ajudar hoje?';
+      if (msg.includes('obrigado') || msg.includes('valeu')) return 'De nada! 💙 Se precisar de mais ajuda, é só chamar.';
+
+      return 'Não entendi bem 🤔. Você pode reformular ou perguntar sobre "pedido", "horário", "telefone" ou "WhatsApp".';
+    }
+  </script>
+  <div>
+    <span><a href="index.html">Voltar ao Inicio</a></span>
+  </div>
+</body>
+</html>
